@@ -34,9 +34,9 @@ class PortfolioRendererTest(unittest.TestCase):
 
     def write_documents(self) -> None:
         blocks = {
-            "README.md": ("facts", "status", "soc", "snapshot", "verification", "benchmarks", "synthesis", "provenance"),
+            "README.md": ("facts", "status", "soc", "highlights"),
             "docs/evidence.md": ("overview", "facts", "status", "soc", "verification", "benchmarks", "synthesis", "synthesis-hashes", "provenance"),
-            "docs/architecture.md": ("facts", "status", "benchmarks", "synthesis"),
+            "docs/architecture.md": ("facts", "status"),
             "docs/verification.md": ("facts", "status", "summary"),
         }
         for relative, names in blocks.items():
@@ -164,9 +164,10 @@ class PortfolioRendererTest(unittest.TestCase):
             self.root / "docs/verification.md",
             self.root / "docs/coverage.md",
         })
-        self.assertIn("25 directed tests × 6 memory configurations", rendered[self.root / "README.md"])
-        self.assertIn("66.7–83.3 MHz routed Artix-7 implementations", rendered[self.root / "README.md"])
-        self.assertIn("RISC-V assembler 2.42", rendered[self.root / "README.md"])
+        self.assertIn("Directed runs across 6 memory configurations | 150/150", rendered[self.root / "README.md"])
+        self.assertIn("200/200", rendered[self.root / "README.md"])
+        self.assertNotIn("MHz routed", rendered[self.root / "README.md"])
+        self.assertIn("RISC-V assembler 2.42", rendered[self.root / "docs/evidence.md"])
         self.assertIn("38/38", rendered[self.root / "docs/evidence.md"])
         self.assertIn(
             "Physical-board evidence: not published",
@@ -247,14 +248,9 @@ class SocDocumentationContractTest(unittest.TestCase):
     def test_readme_links_the_soc_guide_and_labels_the_recording(self) -> None:
         source = self.read("README.md")
         self.assertIn("[Board-ready SoC](docs/soc.md)", source)
-        self.assertIn("![Actual post-route physical placement]", source)
-        self.assertIn("docs/images/soc-floorplan.svg", source)
-        self.assertIn("actual Vivado post-route primitive locations", source)
-        self.assertIn("![Native Vivado implemented-device view", source)
-        self.assertIn("docs/images/soc-vivado-device.png", source)
-        self.assertIn("docs/images/soc-vivado-device.json", source)
-        self.assertIn("not proof of operation on a physical board", source)
-        self.assertIn("not a conceptual CPU illustration", source)
+        self.assertIn("docs/fpga.md", source)
+        self.assertIn("docs/decisions.md", source)
+        self.assertIn("docs/portfolio/README.md", source)
         self.assertIn("verification workflow", source)
         self.assertIn("not FPGA board footage", source)
         self.assertIn("make soc-check", source)

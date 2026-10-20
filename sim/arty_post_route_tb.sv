@@ -8,6 +8,8 @@ module arty_post_route_tb;
     logic [1:0] btn = 2'b00;
     wire [3:0] led;
     wire uart_tx;
+    logic [7:0] uart_byte = 0;
+    integer received_bytes = 0;
 
     arty_a7_35t_top dut (
         .clk100(clk100),
@@ -43,12 +45,17 @@ module arty_post_route_tb;
             if (value !== EXPECTED[index])
                 $fatal(1, "UART mismatch at byte %0d: got %02x expected %02x",
                     index, value, EXPECTED[index]);
+            uart_byte = value;
+            received_bytes = index + 1;
+            $display("UART byte %0d: 0x%02x", index, value);
         end
         #1us;
         if (led !== 4'h1)
             $fatal(1, "boot LED value was %x", led);
         if (uart_tx !== 1'b1)
             $fatal(1, "UART was not idle after the boot banner");
+        $display("UART verified: rv32i soc ready");
+        $display("LED verified: %x", led);
         $display("PASS Arty A7 post-route timing simulation");
         $finish;
     end

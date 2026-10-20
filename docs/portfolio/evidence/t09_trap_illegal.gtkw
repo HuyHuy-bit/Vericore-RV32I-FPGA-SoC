@@ -1,0 +1,24 @@
+[*] Curated signals for the portfolio capture
+[dumpfile] "t09_trap_illegal.vcd"
+[timestart] 0
+@28
+TOP.clk
+TOP.rst
+@22
+TOP.cpu.u_core.u_frontend.pc_out[31:0]
+@28
+TOP.cpu.u_core.if_id_q.valid
+@28
+TOP.cpu.u_core.u_backend.id_ex_q.valid
+@28
+TOP.cpu.u_core.u_backend.ex_mem_q.valid
+@28
+TOP.cpu.u_core.trap_redirect
+@22
+TOP.cpu.u_core.trap_target[31:0]
+@22
+TOP.cpu.u_core.u_backend.u_csr.mepc[31:0]
+@22
+TOP.cpu.u_core.u_backend.u_csr.mcause[31:0]
+@28
+TOP.cpu.u_core.u_backend.mem_wb_q.reg_write_en

@@ -1,0 +1,112 @@
+diff --git a/rtl/core/branch_predictor.sv b/rtl/core/branch_predictor.sv
+index a18805a..e46b668 100644
+--- a/rtl/core/branch_predictor.sv
++++ b/rtl/core/branch_predictor.sv
+@@ -95,9 +95,11 @@ module branch_predictor #(
+         if (rst) begin
+             for (int i = 0; i < NUM_ENTRIES; i++) begin
+                 bht[i]       <= 2'b01;             // weakly not-taken: neutral-ish start
++                // Only the valid bit needs a defined reset: every hit is
++                // qualified by btb_valid, so tag and target are never read
++                // before they are written. Leaving them unreset keeps the
++                // arrays out of flops, where a bulk clear would force them.
+                 btb_valid[i] <= 1'b0;
+-                btb_tag[i]   <= '0;
+-                btb_tgt[i]   <= XLEN'(0);
+             end
+             ghistory <= '0;
+         end else if (update_en) begin
+diff --git a/rtl/core/frontend.sv b/rtl/core/frontend.sv
+index 4be9173..8930cb7 100644
+--- a/rtl/core/frontend.sv
++++ b/rtl/core/frontend.sv
+@@ -127,7 +127,12 @@ module frontend #(
+     // if_id_reg would actually latch it - re-presentations of a frozen or
+     // held fetch must not push/pop twice.
+     logic fetch_accept;
+-    assign fetch_accept = !pipe_stall && !load_use_stall;
++    // A flush cycle's IF instruction is already known wrong and if_id_reg
++    // discards it, so pushing or popping the RAS for it corrupts the stack
++    // with a fetch the pipeline has already resolved as dead. This is not
++    // the deliberate speculation the RAS accepts elsewhere.
++    assign fetch_accept = !pipe_stall && !load_use_stall
++                          && !ex_flush && !trap_redirect;
+ 
+     logic ras_push, ras_pop, ras_pop_valid;
+     logic [XLEN-1:0] ras_pop_addr;
+diff --git a/sim/arty_post_route_tb.sv b/sim/arty_post_route_tb.sv
+index 3e9998c..dc9d0c0 100644
+--- a/sim/arty_post_route_tb.sv
++++ b/sim/arty_post_route_tb.sv
+@@ -8,6 +8,8 @@ module arty_post_route_tb;
+     logic [1:0] btn = 2'b00;
+     wire [3:0] led;
+     wire uart_tx;
++    logic [7:0] uart_byte = 0;
++    integer received_bytes = 0;
+ 
+     arty_a7_35t_top dut (
+         .clk100(clk100),
+@@ -43,12 +45,17 @@ module arty_post_route_tb;
+             if (value !== EXPECTED[index])
+                 $fatal(1, "UART mismatch at byte %0d: got %02x expected %02x",
+                     index, value, EXPECTED[index]);
++            uart_byte = value;
++            received_bytes = index + 1;
++            $display("UART byte %0d: 0x%02x", index, value);
+         end
+         #1us;
+         if (led !== 4'h1)
+             $fatal(1, "boot LED value was %x", led);
+         if (uart_tx !== 1'b1)
+             $fatal(1, "UART was not idle after the boot banner");
++        $display("UART verified: rv32i soc ready");
++        $display("LED verified: %x", led);
+         $display("PASS Arty A7 post-route timing simulation");
+         $finish;
+     end
+diff --git a/synthesis/soc/post_route_sim.tcl b/synthesis/soc/post_route_sim.tcl
+index 6d3cd04..78ef942 100644
+--- a/synthesis/soc/post_route_sim.tcl
++++ b/synthesis/soc/post_route_sim.tcl
+@@ -22,7 +22,7 @@ set_property generic [list IMEM_INIT_FILE=$imem_file DMEM_INIT_FILE=$dmem_file]
+     [get_filesets sources_1]
+ set_property verilog_define SYNTHESIS [get_filesets sources_1]
+ set_property target_simulator XSim [current_project]
+-set_property xsim.simulate.runtime all [get_filesets sim_1]
++set_property xsim.simulate.runtime 0ns [get_filesets sim_1]
+ update_compile_order -fileset sources_1
+ update_compile_order -fileset sim_1
+ 
+@@ -34,6 +34,14 @@ open_run impl_1
+ 
+ report_timing_summary -delay_type min_max -report_unconstrained \
+     -file "$output_dir/timing_summary.rpt"
++report_utilization -file "$output_dir/utilization.rpt"
++report_drc -file "$output_dir/drc.rpt"
++report_clocks -file "$output_dir/clocks.rpt"
++set severe_drc [get_drc_violations -quiet \
++    -filter {SEVERITY == "Error" || SEVERITY == "Critical Warning"}]
++if {[llength $severe_drc] != 0} {
++    error "DRC contains a critical warning or error"
++}
+ set setup_path [get_timing_paths -setup -max_paths 1]
+ if {[llength $setup_path] != 1} {
+     error "no setup timing path was reported"
+@@ -85,5 +93,16 @@ close $meta
+ write_sdf -force $sdf_file
+ write_verilog -force -mode timesim -sdf_anno true -sdf_file $sdf_file \
+     $netlist_file
++write_checkpoint -force "$output_dir/routed.dcp"
++write_bitstream -force "$output_dir/rv32i-soc-arty-a7-35t.bit"
+ launch_simulation -mode post-implementation -type timing
++open_vcd "$output_dir/timing-boot.vcd"
++log_vcd [get_objects /arty_post_route_tb/clk100]
++log_vcd [get_objects /arty_post_route_tb/btn]
++log_vcd [get_objects /arty_post_route_tb/led]
++log_vcd [get_objects /arty_post_route_tb/uart_tx]
++log_vcd [get_objects /arty_post_route_tb/uart_byte]
++log_vcd [get_objects /arty_post_route_tb/received_bytes]
++run all
++close_vcd
+ puts "===SOC_POST_ROUTE_SIM_DONE==="

@@ -1,0 +1,22 @@
+Time resolution is 1 ps
+UART byte 0: 0x72
+UART byte 1: 0x76
+UART byte 2: 0x33
+UART byte 3: 0x32
+UART byte 4: 0x69
+UART byte 5: 0x20
+UART byte 6: 0x73
+UART byte 7: 0x6f
+UART byte 8: 0x63
+UART byte 9: 0x20
+UART byte 10: 0x72
+UART byte 11: 0x65
+UART byte 12: 0x61
+UART byte 13: 0x64
+UART byte 14: 0x79
+UART byte 15: 0x0a
+UART verified: rv32i soc ready
+LED verified: 1
+PASS Arty A7 post-route timing simulation
+$finish called at time : 1405237535 ps : File "C:/Users/huyng/AppData/Local/Temp/rv32i-evidence-o5pquug6/sim/arty_post_route_tb.sv" Line 60
+INFO: xsimkernel Simulation Memory Usage: 454888 KB (Peak: 454888 KB), Simulation CPU Usage: 3318843 ms

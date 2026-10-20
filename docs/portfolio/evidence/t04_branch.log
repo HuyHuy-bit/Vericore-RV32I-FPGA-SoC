@@ -1,0 +1,27 @@
+Test signalled completion via tohost: code=0x1
+Registers after 35 cycles:
+  x7 = 99  (0x63)
+  x10 = 5  (0x5)
+  x11 = 5  (0x5)
+  x12 = 3  (0x3)
+  x13 = 7  (0x7)
+  x14 = 4294967295  (0xffffffff)
+  x15 = 1  (0x1)
+  x16 = 5  (0x5)
+  x17 = 3  (0x3)
+  x18 = 3  (0x3)
+  x19 = 4294967295  (0xffffffff)
+  x30 = 65520  (0xfff0)
+  x31 = 1  (0x1)
+  PASS  x1
+  PASS  x2
+  PASS  x3
+  PASS  x4
+  PASS  x5
+  PASS  x6
+  PASS  x7
+  perf: cycles=35 instret=19 stalls=0 flushes=6 memstall=0 CPI=1.84211
+  bpred: branches=6 mispredicts=6 accuracy=0%
+  icache: accesses=35 misses=0 hitrate=100%
+  dcache: accesses=0 misses=0 hitrate=0%
+PASS

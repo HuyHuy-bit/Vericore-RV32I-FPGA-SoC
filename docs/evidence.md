@@ -1,53 +1,24 @@
 # Evidence ledger
 
-<!-- portfolio:overview:start -->
-This ledger separates source-derived facts, pinned external inputs, current measurements, and historical design studies. Open-source gates were measured at `2026-09-20T18:34:46Z`; the compact result set was published at `2026-09-20T18:35:53Z`; Vivado manifests record `2026-08-29`. The tooling commit is `21df7609ef9dc746ded58762ac2d03471a291eb5`, and the frozen RTL baseline is `d21ecd3fe310bf49c505220c134f8cfd205c90e5`.
+[Documentation index](README.md) · [Verification](verification.md) · [FPGA report](fpga.md)
 
-The pinned environment is Ubuntu 24.04 in `ghcr.io/huyhuy-bit/rv32i-verify:1` (`sha256:1edaf9f599344d2ebb735f3fc18d940241e5b8cf9fb341becc8000f505ab070d`), Verilator 5.048, Python 3.12, RISC-V GCC 13.2.0-2024.04.12 with assembler 2.42, Spike `55b4658dbf574ba0b714083ec436ce2cb5be1998`, architecture tests `6f7f47bdc61c0c51c0cbf75789678a1235eeefc2`, and Vivado 2025.2 build 6299465.
-<!-- portfolio:overview:end -->
+## Read the evidence by scope
 
-## Machine-checked facts
-
-<!-- portfolio:facts:start -->
-<!-- evidence-facts:begin -->
-EVIDENCE_FACT ISA=RV32I_Zicsr_Zifencei
-EVIDENCE_FACT DIRECTED_TESTS=25
-EVIDENCE_FACT ASSERTIONS_TOTAL=66
-EVIDENCE_FACT ASSERTIONS_CONCURRENT=63
-EVIDENCE_FACT ASSERTIONS_IMMEDIATE=3
-EVIDENCE_FACT SOURCE_COVER_POINTS=44
-EVIDENCE_FACT TRACKED_COVERAGE_HIT=44
-EVIDENCE_FACT TRACKED_COVERAGE_TOTAL=44
-EVIDENCE_FACT TRACKED_COVERAGE_STATUS=current
-EVIDENCE_FACT EVIDENCE_STATUS=current
-EVIDENCE_FACT SYNTHESIS_STATUS=historical
-EVIDENCE_FACT CI_CONFIGS=6
-EVIDENCE_FACT CI_MATRIX=baseline,slow-mem,icache-only,wt,wb,assoc
-EVIDENCE_FACT ARCH_TEST_SHA=6f7f47bdc61c0c51c0cbf75789678a1235eeefc2
-EVIDENCE_FACT ARCH_TEST_EXPECTED=38
-EVIDENCE_FACT SPIKE_SHA=55b4658dbf574ba0b714083ec436ce2cb5be1998
-EVIDENCE_FACT SPIKE_RANDOM_SEEDS=200
-<!-- evidence-facts:end -->
-<!-- portfolio:facts:end -->
-
-These values are checked against the Make test list and on-disk pairs, RTL
-assertions and covers, workflow matrix and seed command, coverage report, and
-central reference metadata by `make evidence-check`.
+| Evidence | Source | What it establishes |
+|---|---|---|
+| Full-suite baseline | [verification.json](../results/verification.json) | Recorded directed, architecture, random, and coverage results for the identified baseline. |
+| Benchmarks | [benchmarks.csv](../results/benchmarks.csv) | Core-wrapper kernel cycles/CPI under each stated memory configuration. |
+| Historical core implementation matrix | [synthesis.csv](../results/synthesis.csv) | Four routed core configurations under a deliberately aggressive 2 ns constraint. |
+| Current FPGA experiment | [FPGA report](fpga.md) | Separate working-tree implementation and post-route timing simulation. |
+| Native waveforms | [EDA visuals](portfolio/README.md) | Inspectable VCD traces and unedited tool screenshots. |
+| Physical board | [SoC procedure](soc.md#manual-resetbuttonuart-checklist) | Requires actual board programming and observed UART/button/LED behavior. |
 
 <!-- portfolio:status:start -->
-Current measurements — validated for the checked-out RTL.
-Historical synthesis — the implementation table was measured for RTL e55cf402670481413c910c2f2a51617ed53342a5; current RTL changes are not yet resynthesised.
+Historical measurements — validated for RTL d21ecd3fe310bf49c505220c134f8cfd205c90e5; current RTL changes are not yet remeasured.
+Historical synthesis — the implementation table was measured for RTL e55cf402670481413c910c2f2a51617ed53342a5; this core configuration matrix has not been rerun for current RTL.
 <!-- portfolio:status:end -->
 
-## Physical-board evidence
-
-<!-- portfolio:soc:start -->
-Physical-board evidence: not published
-<!-- portfolio:soc:end -->
-
-The pending state is intentional. Simulation and board-flow contracts do not prove a physical FPGA run. Publication requires a clean committed checkout, Vivado 2025.2 route with nonnegative WNS and clean DRC, validated firmware/bitstream/report hashes, complete full and SoC verification receipts, the exact UART transcript, and two manually observed BTN1/LED events. The collector accepts no command-line measurement overrides; see the [SoC guide](soc.md).
-
-## Current verification measurements
+## Recorded verification baseline
 
 <!-- portfolio:verification:start -->
 | Metric | Value | How measured |
@@ -64,15 +35,14 @@ The pending state is intentional. Simulation and board-flow contracts do not pro
 | Functional cover points | 44/44 | `make coverage` |
 <!-- portfolio:verification:end -->
 
-The six directed configurations were baseline; `IMEM_LAT=10 DMEM_LAT=10`;
-1KB four-way I$; that I$ plus a 4KB four-way write-through D$; the same with a
-write-back D$; and a two-way associative I$/D$ variant. All slow-memory cache
-rows used 10-cycle instruction and data backing memory.
+Memory configurations: baseline; `IMEM_LAT=10 DMEM_LAT=10`; 1 KiB four-way I-cache;
+that I-cache plus 4 KiB four-way write-through D-cache; the write-back variant;
+and a two-way I/D-cache variant. Slow-memory rows use ten-cycle backing memory.
 
-## Current benchmark measurements
+## Recorded benchmark baseline
 
-Each row below passed its host-oracle result check. `make bench` selected the
-exact simulator built for the listed parameters.
+Each cell is **cycles / CPI**. Kernels passed their host-oracle result checks.
+These use the legacy core wrapper, not the Wishbone board memory system.
 
 <!-- portfolio:benchmarks:start -->
 | Kernel | 10-cycle uncached | +1KB 4-way I$ | +4KB 4-way WB D$ | 1-cycle uncached |
@@ -84,16 +54,16 @@ exact simulator built for the listed parameters.
 | interp | 14,652,250 / 11.69906 | 2,932,916 / 2.34178 | 2,933,124 / 2.34195 | 1,467,250 / 1.17152 |
 <!-- portfolio:benchmarks:end -->
 
-Commands were `make bench IMEM_LAT=10 DMEM_LAT=10`; the same with
-`IC_BYTES=1024 IC_WAYS=4`; the same with `DC_BYTES=4096 DC_WAYS=4 DC_WB=1`;
-and plain `make bench` for ideal one-cycle uncached memory.
+Reproduce with `make bench IMEM_LAT=10 DMEM_LAT=10`, then add
+`IC_BYTES=1024 IC_WAYS=4`, then `DC_BYTES=4096 DC_WAYS=4 DC_WB=1`.
+Plain `make bench` is the one-cycle uncached comparison.
 
-## Current synthesis measurements
+## Historical core synthesis matrix
 
-`make synth-matrix` and `make synth-summary` routed four configurations with
-512-word instruction/data backing memories on `xc7a35ticsg324-1L`. The 2 ns
-constraint is intentionally aggressive; all WNS values are negative, so these
-are routed critical-path estimates rather than timing closure claims.
+These are out-of-context `cpu` builds with 512-word backing memories. Their
+negative WNS means the **2 ns target was not met**. The fmax column is derived
+from the routed critical path; it is not the SoC clock or physical-board speed.
+The separate [FPGA report](fpga.md) uses the board top and a 50 MHz SoC constraint.
 
 <!-- portfolio:synthesis:start -->
 | Configuration | LUT | FF | BRAM tiles | WNS (ns) | Critical path (ns) | fmax (MHz) |
@@ -103,6 +73,9 @@ are routed critical-path estimates rather than timing closure claims.
 | +4KB 4-way WT D$ | 8,800 | 13,527 | 4.0 | -12.172 | 14.172 | 70.562 |
 | +4KB 4-way WB D$ | 9,218 | 13,517 | 4.0 | -11.920 | 13.920 | 71.839 |
 <!-- portfolio:synthesis:end -->
+
+<details>
+<summary>Original synthesis report hashes</summary>
 
 <!-- portfolio:synthesis-hashes:start -->
 The SHA-256 pairs below are `utilization.rpt` / `timing_summary.rpt`:
@@ -114,6 +87,20 @@ The SHA-256 pairs below are `utilization.rpt` / `timing_summary.rpt`:
 | D$ write-through | `2a98b8d37f67e9d393b1c4072e484a6a5c696ce772984a6710e2549ca35c82ca` / `6af38f4ea2a279b49c75013858cdfb3205c3697dfeb4d27ee640c2834b8c1251` |
 | D$ write-back | `3e088416f98d84ef9ddb8d4784ddde2e6f7a80472d322b56752b192f2eda4ba3` / `a12a3e63c32789d561ad0658b8c0954b6313e8a34dec7d8365523de90b2cfec7` |
 <!-- portfolio:synthesis-hashes:end -->
+
+</details>
+
+## Physical-board status
+
+<!-- portfolio:soc:start -->
+Physical-board evidence: not published
+<!-- portfolio:soc:end -->
+
+`tools/results.py collect-soc` publishes this state only after the clean-commit,
+implementation, verification, and manually observed UART/button/LED requirements
+pass. A working-tree EDA experiment does not populate `results/soc.json`.
+
+## Revisions and tools
 
 <!-- portfolio:provenance:start -->
 - Measurement timestamp: `2026-09-20T18:35:53Z`
@@ -127,8 +114,45 @@ The SHA-256 pairs below are `utilization.rpt` / `timing_summary.rpt`:
 - Reproduce implementation: `make synth-matrix && make synth-summary`
 <!-- portfolio:provenance:end -->
 
-## Historical material
+<details>
+<summary>Full baseline provenance</summary>
 
-Earlier cache-geometry and inference experiments remain in the README and
-microarchitecture document because they explain the design decisions. They are
-explicitly labeled historical and are not mixed with the current matrices.
+<!-- portfolio:overview:start -->
+This ledger separates source-derived facts, pinned external inputs, current measurements, and historical design studies. Open-source gates were measured at `2026-09-20T18:34:46Z`; the compact result set was published at `2026-09-20T18:35:53Z`; Vivado manifests record `2026-08-29`. The tooling commit is `21df7609ef9dc746ded58762ac2d03471a291eb5`, and the frozen RTL baseline is `d21ecd3fe310bf49c505220c134f8cfd205c90e5`.
+
+The pinned environment is Ubuntu 24.04 in `ghcr.io/huyhuy-bit/rv32i-verify:1` (`sha256:1edaf9f599344d2ebb735f3fc18d940241e5b8cf9fb341becc8000f505ab070d`), Verilator 5.048, Python 3.12, RISC-V GCC 13.2.0-2024.04.12 with assembler 2.42, Spike `55b4658dbf574ba0b714083ec436ce2cb5be1998`, architecture tests `6f7f47bdc61c0c51c0cbf75789678a1235eeefc2`, and Vivado 2025.2 build 6299465.
+<!-- portfolio:overview:end -->
+
+</details>
+
+<details>
+<summary>Machine-checked facts</summary>
+
+<!-- portfolio:facts:start -->
+<!-- evidence-facts:begin -->
+EVIDENCE_FACT ISA=RV32I_Zicsr_Zifencei
+EVIDENCE_FACT DIRECTED_TESTS=25
+EVIDENCE_FACT ASSERTIONS_TOTAL=66
+EVIDENCE_FACT ASSERTIONS_CONCURRENT=63
+EVIDENCE_FACT ASSERTIONS_IMMEDIATE=3
+EVIDENCE_FACT SOURCE_COVER_POINTS=44
+EVIDENCE_FACT TRACKED_COVERAGE_HIT=44
+EVIDENCE_FACT TRACKED_COVERAGE_TOTAL=44
+EVIDENCE_FACT TRACKED_COVERAGE_STATUS=historical
+EVIDENCE_FACT EVIDENCE_STATUS=historical
+EVIDENCE_FACT SYNTHESIS_STATUS=historical
+EVIDENCE_FACT CI_CONFIGS=6
+EVIDENCE_FACT CI_MATRIX=baseline,slow-mem,icache-only,wt,wb,assoc
+EVIDENCE_FACT ARCH_TEST_SHA=6f7f47bdc61c0c51c0cbf75789678a1235eeefc2
+EVIDENCE_FACT ARCH_TEST_EXPECTED=38
+EVIDENCE_FACT SPIKE_SHA=55b4658dbf574ba0b714083ec436ce2cb5be1998
+EVIDENCE_FACT SPIKE_RANDOM_SEEDS=200
+<!-- evidence-facts:end -->
+<!-- portfolio:facts:end -->
+
+</details>
+
+`make evidence-check` validates the source/test/CI contracts. `make results-check`
+validates the stored result records. `make portfolio-render-check` checks that
+generated documentation matches them. Historical optimization comparisons are
+kept in [studies.md](studies.md), separately from these result tables.

@@ -1,8 +1,10 @@
 # Board-ready SoC guide
 
+[Documentation index](README.md) · [Architecture](architecture.md) · [FPGA evidence](fpga.md)
+
 `rv32i_soc` attaches the pipeline core to a Wishbone fabric with BRAM, UART and GPIO; `arty_a7_35t_top` wraps it for the Digilent Arty A7-35T. This guide is the contract for that system.
 
-Physical-board evidence: not published. The RTL, firmware, simulation, constraints and guarded Vivado flow exist, but nothing here claims a bitstream has run on hardware.
+Physical-board evidence: not published. Implementation and timing-simulation results are recorded separately in the [FPGA report](fpga.md).
 
 ## Board and demo
 
@@ -91,7 +93,11 @@ make soc-post-route-sim
 make soc-program
 ```
 
-The build requires the exact part and top, a 10.000 ns input constraint, one 20.000 ns generated SoC clock, nonnegative WNS, clean DRC and fresh outputs, publishing only the bitstream, compact reports, placed coordinates and manifest. The floorplan target turns routed coordinates into the SVG in the README; the post-route sim regenerates a timing netlist and SDF and runs the boot banner through XSim. The published Device capture and provenance (`docs/images/soc-vivado-device.png`, `.json`) are not physical-board evidence. Programming checks the JTAG-visible die, waits for DONE, and rejects a missing completion marker.
+The build requires the exact part and top, a 10.000 ns input constraint, one 20.000 ns generated SoC clock, nonnegative WNS, no DRC errors or critical warnings, and fresh outputs, publishing only the bitstream, compact reports, placed coordinates and manifest. The floorplan target turns routed coordinates into the SVG in the README; the post-route sim generates a timing netlist, SDF, bitstream, routed checkpoint, and top-level VCD, then verifies the boot banner and LED through XSim. The published Device capture and provenance (`docs/images/soc-vivado-device.png`, `.json`) are not physical-board evidence. Programming checks the JTAG-visible die, waits for DONE, and rejects a missing completion marker.
+
+For an uncommitted working tree, use the source-hashed experiment described in
+[fpga.md](fpga.md). It keeps local EDA evidence separate from the clean-commit
+publication flow.
 
 ## Manual reset/button/UART checklist
 

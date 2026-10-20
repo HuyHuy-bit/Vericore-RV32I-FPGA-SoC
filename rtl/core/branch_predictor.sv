@@ -95,9 +95,11 @@ module branch_predictor #(
         if (rst) begin
             for (int i = 0; i < NUM_ENTRIES; i++) begin
                 bht[i]       <= 2'b01;             // weakly not-taken: neutral-ish start
+                // Only the valid bit needs a defined reset: every hit is
+                // qualified by btb_valid, so tag and target are never read
+                // before they are written. Leaving them unreset keeps the
+                // arrays out of flops, where a bulk clear would force them.
                 btb_valid[i] <= 1'b0;
-                btb_tag[i]   <= '0;
-                btb_tgt[i]   <= XLEN'(0);
             end
             ghistory <= '0;
         end else if (update_en) begin

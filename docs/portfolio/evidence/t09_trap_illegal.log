@@ -1,0 +1,18 @@
+Test signalled completion via tohost: code=0x1
+Registers after 17 cycles:
+  x1 = 24  (0x18)
+  x4 = 99  (0x63)
+  x5 = 1  (0x1)
+  x6 = 2  (0x2)
+  x7 = 16  (0x10)
+  x30 = 65520  (0xfff0)
+  x31 = 1  (0x1)
+  PASS  x4
+  PASS  x5
+  PASS  x6
+  PASS  x7
+  perf: cycles=17 instret=10 stalls=0 flushes=1 memstall=0 CPI=1.7
+  bpred: branches=0 mispredicts=0 accuracy=0%
+  icache: accesses=17 misses=0 hitrate=100%
+  dcache: accesses=0 misses=0 hitrate=0%
+PASS

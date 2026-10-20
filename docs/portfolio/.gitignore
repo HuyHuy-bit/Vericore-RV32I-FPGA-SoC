@@ -1,0 +1,3 @@
+# Retain these small traces and logs as inspectable figure evidence.
+!evidence/*.vcd
+!evidence/*.log

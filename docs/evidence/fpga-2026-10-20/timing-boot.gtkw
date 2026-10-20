@@ -1,0 +1,8 @@
+[*] Original XSim post-route timing trace
+[dumpfile] "timing-boot.vcd"
+@22
+arty_post_route_tb.led[3:0]
+@28
+arty_post_route_tb.uart_tx
+@22
+arty_post_route_tb.uart_byte[7:0]

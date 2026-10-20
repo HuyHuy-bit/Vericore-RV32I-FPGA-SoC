@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "captured_at": "2026-10-20T18:00:30.996163+00:00",
+  "git_head": "e7c571aca7527f94397d1b9864c5d719ac0c5eec",
+  "working_tree_changes": [
+    "README.md",
+    "rtl/core/branch_predictor.sv",
+    "rtl/core/frontend.sv"
+  ],
+  "source_sha256": {
+    "rtl/boards/arty_a7_35t_top.sv": "c4cdc64baa23d3e1baf032529027f2e68c5753fcb6b5a4a35abe2d9dea2d0781",
+    "rtl/boards/arty_clock.sv": "1e722fc4dd8c05f2cb9895a4bc156c25c8139ac1067a2c3153a5bb4a3cbd2bd6",
+    "rtl/bus/wb_arbiter.sv": "52d20074cc89407f91662f3d66a0b88c2925d99466a6876e3ee6bf7b8fd877ca",
+    "rtl/bus/wb_master_adapter.sv": "7a4d2b063d0e834b9e0ec7180f8213b8fb68adf1837286948993a59d23c34a13",
+    "rtl/core/alu.sv": "d2e35bd0b673f48f75bf40f95bef55f72a114462418541c96ddc15d735421825",
+    "rtl/core/backend.sv": "2f62cc2b352a636443d7b0a6ad42bb6b89848e852939239031c989aa0d4ed5dd",
+    "rtl/core/branch_predictor.sv": "89d24e476d2ec1ec815f57a3218a2a9405ebf2a55021fd4f43a2c5c9ef8de075",
+    "rtl/core/branch_unit.sv": "10a030ec263b5bf830ab7cee9354e2555b449b243901c54950fdd9a5f219acdc",
+    "rtl/core/control.sv": "0884733e771aa270e8d37bc98a535052642f00a88340323ade24aeae16876420",
+    "rtl/core/cpu.sv": "b18f725672d74d7c4737e169b770ef868786a24efb79f8f74cd696d119c5cfe0",
+    "rtl/core/csr.sv": "2faf3888a7800ff93d0de71c6070475f407bbf2ad61e6ac638da63dfc2b19cf8",
+    "rtl/core/ex_mem_reg.sv": "dc0c88b0563c441e191833ee173b3971dc4c58806d276251e8538232395d481a",
+    "rtl/core/forwarding_unit.sv": "ac60df1283abb550f1f7484cba03eb63c79ed2b3a8b3e57ff3b3602d9aab2555",
+    "rtl/core/frontend.sv": "1f182bc385337c0ea9b20fb91df79880a3b515b57b117acfb56e544a4ab2a9f7",
+    "rtl/core/hazard_detect.sv": "34f9f91f8644d5490100938721cb24d227149e8674a45f48bdbb47dd3ea257e3",
+    "rtl/core/id_ex_reg.sv": "b8270d01ae08280c0eb98081e1a3532e1d1de7c5aa2b9c32d6e91a3f3158ba3f",
+    "rtl/core/if_id_reg.sv": "4f0e41e0646a3790e89089def4831caa76c7b52bb55fafb40f94d766e82d6fa4",
+    "rtl/core/imm_gen.sv": "5d3b9daac26146445fcf0c34bd4dc76177474b3a86d145952fea086a21fb3a75",
+    "rtl/core/mem_wb_reg.sv": "162db0de223158b9383d6e7aa02da3b54cbb1de2dbffb18d33bd3f38cf3cb5e7",
+    "rtl/core/pc.sv": "de5dbcc9a17acffd312524191db536d208ff2d188e62725f6ead5f1c148bbe65",
+    "rtl/core/perf_counters.sv": "59e50ec9095d38baa0d60a0ccb241e2d4ad40000536ea288bb27f5b8efccb49e",
+    "rtl/core/ras.sv": "5292f0737bb80f2e3a87fbab5fcfe685512facb873204281fc1e668b298c99e2",
+    "rtl/core/reg_file.sv": "826eb45aa4c945b2381a7ae43737bd342b872d8aeeca41964568d8758a4e5792",
+    "rtl/core/rv32i_core.sv": "1767a828905acbedafc1ad70b94d1a2f12fe704d6eae0735409358b8d3ae58c4",
+    "rtl/memory/data_mem.sv": "9d1f83fa98a69e2885ab17a6a54817c8ecea3aa10f5ca143628f44da003e6e0f",
+    "rtl/memory/dcache.sv": "3cd54ff8d20fd7cc6134c72fb4fa779847b2c3b45a3467ba64092ae74c8b8d14",
+    "rtl/memory/icache.sv": "07a93e1e23f95b0e0515994319f2cbbc97091ff8e7d908c0f8869730d48ca09b",
+    "rtl/memory/instr_mem.sv": "4eacf93163fae0500bfd90732d6564ccc0b43e67ab7302b3ab21f25907014d1d",
+    "rtl/memory/lsu.sv": "2c00f34b371ad8a4be2fdea1fb34d5ad2f42edd3212d468ac56c0441bf4ec47d",
+    "rtl/memory/mem_timing.sv": "c9a7baa8753510a92cea5d0683a519445bf3b0ee7d267c7e5e79a68a5e7498f7",
+    "rtl/rv32i_pkg.sv": "f3c69d855798585fa937d5ae94ed1d22cab353d29d62a19f0ed8db1feeb01d76",
+    "rtl/soc/button_debounce.sv": "98f1a56baab0454d67e6cfc1f3d6501f69e60caf53dbfa7fa8600cb220b0a20c",
+    "rtl/soc/reset_controller.sv": "a0c59689e38865bcb9c70a3bd0cdfc89a3adc810056041d7eeb7cd03631f4043",
+    "rtl/soc/rv32i_soc.sv": "e92ccb2bffd11ab77705910f4771746695af9a1c8d1f9836265664586a389ca9",
+    "rtl/soc/uart_tx.sv": "a106499735b610a992cdd6a0779ab0c6cfea34b163c93cae46204f7c2f33024a",
+    "rtl/soc/wb_dmem.sv": "25cf10521cc0617e7ec181f3dbc345e7f6300e5e11c785d2927598f060643e6a",
+    "rtl/soc/wb_gpio_irq.sv": "509106d515e3c522780ce78cac5ceb3594b1ad9f690765f4f2d34ded8213d577",
+    "rtl/soc/wb_imem.sv": "2fbe711d4596468879a55e6ee355504d61557f4105e3f4172c77ebf3837260e8",
+    "rtl/soc/wb_interconnect.sv": "494f04924eb79ddb84fa4a74f2a1999e26d1cde2840205c05cba55a45689555b",
+    "rtl/soc/wb_uart.sv": "fafeffdfee5f2e93b77e4cc2a7fadfe5c773211fd29e7ccaa8a8be3cecb572b2",
+    "rtl/verilator.vlt": "92c57a3ef5326fac2d2e664bd38080699f64bb69c9bca4c41cd1845c014fae27",
+    "sim/cpu_tb.cpp": "85fdf905f9a94892c475f094f6af48b9554c05b863fd1b305e3c5d646487c10f",
+    "Makefile": "51064a79df72513a03bf52a5918f1951930e36a25ca0f0793c769fe464a78d73",
+    "tools/asm.py": "0a3153265f468fe553c2fffededea160bf6b2305f1a1de54bff5f14b10bccb86",
+    "tools/build_environment.py": "96cf81228b2007ecc206aec3d2bfc6c2f73f385de20244355ba38852f3c0388f",
+    "tests/t07_load_use.s": "74e3077469e0cd2f81bf56ded37faa9db46a25919414506c9636b49b60f8763d",
+    "tests/t07_load_use.ref": "2dc6f1ca86eea25afba310f21f0ff28e82d44cf45221a4aaa77ea0d7b054c486",
+    "tests/t04_branch.s": "bd34dec0140a13bcf33e8a7c50501b568ef8bbdaea7cbbfdb9acc810b24c321d",
+    "tests/t04_branch.ref": "95067520f014e66685efd55e5ca0700bb4efe221af205f4e143d9296f64824f4",
+    "tests/t09_trap_illegal.s": "31ba33094e7532747340981169a2ba2176c4e40c24823256d165d6726d581c72",
+    "tests/t09_trap_illegal.ref": "12e7eea7771b11c422eb9d3c1d82eee6c1ad50059d5719fb2faec4db13a66265"
+  },
+  "verilator": "Verilator 5.048 2026-04-26 rev v5.048-56-gc233a3905",
+  "simulator_sha256": "95204935ab6a7d8b30a79111c3aa723d1d50102c921411b88c435cd2234931ae",
+  "build_command": [
+    "make",
+    "sim",
+    "assemble",
+    "OBJDIR=obj_dir_portfolio",
+    "VFLAGS=--cc --exe --build --trace --trace-structs --assert --timing -j 4"
+  ],
+  "configuration": "No caches; IMEM_LAT=DMEM_LAT=1; bimodal BTB; RAS_DEPTH=8",
+  "tests": {
+    "t07_load_use": {
+      "command": [
+        "./obj_dir_portfolio/Vcpu",
+        "+MEMFILE=tests/t07_load_use.hex",
+        "+REFFILE=tests/t07_load_use.ref",
+        "+STOP=tohost",
+        "+CYCLES=30",
+        "+VCD=docs/portfolio/evidence/t07_load_use.vcd"
+      ],
+      "status": "PASS",
+      "metrics": {
+        "code": "0",
+        "cycles": "22",
+        "instret": "15",
+        "stalls": "3",
+        "flushes": "0",
+        "memstall": "0",
+        "CPI": "1.46667",
+        "branches": "0",
+        "mispredicts": "0",
+        "accuracy": "0",
+        "accesses": "0",
+        "misses": "0",
+        "hitrate": "0"
+      },
+      "program_sha256": "247c53c88b5b574cf17cf8fbb149b21fffeed05206a94af5dfa188f4e54dfef5",
+      "vcd_sha256": "3c54f046d92191cd8ea8f4f7b98a0cf32694c0e834c9c308176f090fce8bc9dc",
+      "log_sha256": "0ab55885c1a151fa45d3f9747e63a855b162c4840d1f6b6e742ca77a6a95eb60"
+    },
+    "t04_branch": {
+      "command": [
+        "./obj_dir_portfolio/Vcpu",
+        "+MEMFILE=tests/t04_branch.hex",
+        "+REFFILE=tests/t04_branch.ref",
+        "+STOP=tohost",
+        "+CYCLES=36",
+        "+VCD=docs/portfolio/evidence/t04_branch.vcd"
+      ],
+      "status": "PASS",
+      "metrics": {
+        "code": "0",
+        "cycles": "35",
+        "instret": "19",
+        "stalls": "0",
+        "flushes": "6",
+        "memstall": "0",
+        "CPI": "1.84211",
+        "branches": "6",
+        "mispredicts": "6",
+        "accuracy": "0",
+        "accesses": "0",
+        "misses": "0",
+        "hitrate": "0"
+      },
+      "program_sha256": "fe35dd533615bec03febed2f497ebc222a792f6fce9e66838af3ff4fcaa418ab",
+      "vcd_sha256": "6a9d1ea84f2549a368af93b430d4491ef63545237cb0e1954faef0786cf09b43",
+      "log_sha256": "e5777de5cf4810dbea234a73c4121d72cff9cc438ba1f31eb1d7e29ce7ab6a69"
+    },
+    "t09_trap_illegal": {
+      "command": [
+        "./obj_dir_portfolio/Vcpu",
+        "+MEMFILE=tests/t09_trap_illegal.hex",
+        "+REFFILE=tests/t09_trap_illegal.ref",
+        "+STOP=tohost",
+        "+CYCLES=60",
+        "+VCD=docs/portfolio/evidence/t09_trap_illegal.vcd"
+      ],
+      "status": "PASS",
+      "metrics": {
+        "code": "0",
+        "cycles": "17",
+        "instret": "10",
+        "stalls": "0",
+        "flushes": "1",
+        "memstall": "0",
+        "CPI": "1.7",
+        "branches": "0",
+        "mispredicts": "0",
+        "accuracy": "0",
+        "accesses": "0",
+        "misses": "0",
+        "hitrate": "0"
+      },
+      "program_sha256": "56a775051135dd6ad2e13bd2d760387496490549db1e03e59e418b91839af26d",
+      "vcd_sha256": "babea35e28fa794d8b105b454411c04bfb3509fbe179f953513860ed3eac7f3d",
+      "log_sha256": "52056b964182cac130fcd8f9b8e4aa16050f7d3ecc869a8146bdbc45eb55d4e4"
+    }
+  },
+  "historical_fpga": {
+    "capture": {
+      "highlighted_regions": {
+        "core": "blue",
+        "data_cache": "magenta",
+        "data_memory": "red",
+        "instruction_memory": "green"
+      },
+      "image_sha256": "9dca4f28624b9ceeeb74267e0fdb83f19481b27985ae7f17512981dd470dce59",
+      "routed_checkpoint_sha256": "1cd4a9deb3939c114273f7b14fbc22a15df292a3bd137c6d7e651e83a71f3556",
+      "view": "Vivado implemented-device Device window with hierarchy highlights"
+    },
+    "firmware": {
+      "dmem_sha256": "e2a781641ce9637c52daea07f06ac16fe70ee751f4f4261477f77d6372a0f329",
+      "imem_sha256": "9f96b12eb89dc02b0f4aa32893960e8ae22bc9ce025c7a75a55b6812467bf70c"
+    },
+    "input_clock_period_ns": 10.0,
+    "part": "xc7a35ticsg324-1L",
+    "post_route_timing_simulation": {
+      "generated_netlist_sha256": "e9db9b391c339ca31cd389ba27948a0bd8c64b2b06d9dea88a289a2880ffda92",
+      "led": 1,
+      "measured_at": "2026-09-01T03:05:30Z",
+      "mode": "post-implementation",
+      "sdf_sha256": "79b1037c5cf981c0fe736596e6a855bf3d1494beb27257d0826c806d8388d1d8",
+      "status": "complete",
+      "testbench": "arty_post_route_tb",
+      "timing_report_sha256": "eac4527d391e75515afc1c289e5f2e91825e2ced2d14aa0dc25e8bd61c4a240c",
+      "transcript_sha256": "2db53c3306653ab89ffc9b7b03fffd7a081722c9412b7936ae4ac46e623607e2",
+      "type": "timing",
+      "uart": "rv32i soc ready\n",
+      "wns_ns": 2.009
+    },
+    "rtl_commit": "d21ecd3fe310bf49c505220c134f8cfd205c90e5",
+    "schema": 1,
+    "soc_clock_period_ns": 20.0,
+    "source_commit": "4f769a5bc7357222e4958af77e828e47ab8604ee",
+    "top": "arty_a7_35t_top",
+    "vivado": {
+      "build": "6299465",
+      "platform": "wsl-windows",
+      "version": "2025.2"
+    },
+    "wns_ns": 2.009
+  }
+}

@@ -127,7 +127,12 @@ module frontend #(
     // if_id_reg would actually latch it - re-presentations of a frozen or
     // held fetch must not push/pop twice.
     logic fetch_accept;
-    assign fetch_accept = !pipe_stall && !load_use_stall;
+    // A flush cycle's IF instruction is already known wrong and if_id_reg
+    // discards it, so pushing or popping the RAS for it corrupts the stack
+    // with a fetch the pipeline has already resolved as dead. This is not
+    // the deliberate speculation the RAS accepts elsewhere.
+    assign fetch_accept = !pipe_stall && !load_use_stall
+                          && !ex_flush && !trap_redirect;
 
     logic ras_push, ras_pop, ras_pop_valid;
     logic [XLEN-1:0] ras_pop_addr;

@@ -1,6 +1,10 @@
 # Measured studies
 
-Four experiments behind the design decisions in [`architecture.md`](architecture.md). Each is a built-twice comparison, not an estimate.
+[Documentation index](README.md) · [Design decisions](decisions.md)
+
+These are retained historical comparisons from earlier RTL builds. They explain
+the design choices; they have not been rerun for the current predictor edits.
+The independently source-bound result tables live in the [evidence ledger](evidence.md).
 
 ## Branch prediction
 
@@ -13,7 +17,7 @@ A BTB indexes by PC, so a `ret` shared by several call sites caches only the mos
 | `RAS_DEPTH=0` (BTB only) | 20 | 42.9% | 117 | 1.60 |
 | `RAS_DEPTH=8` | 7 | **80.0%** | 91 | **1.25** |
 
-The 7 remaining are the RAS's own limitation: push/pop happen speculatively at fetch and a flush does not roll the stack back, so a wrong-path fetch can push a premature entry. The `bench/` kernels are loop-dominated, so this does not move the CPI table.
+In that measured revision, the 7 remaining reflected the RAS limitation: push/pop happen speculatively at fetch and a flush does not roll the stack back, so a wrong-path fetch can push a premature entry. The `bench/` kernels are loop-dominated. The current frontend also suppresses RAS updates on redirect cycles; the table predates that change.
 
 ### Optional gshare (`GSHARE=1`)
 
@@ -67,7 +71,7 @@ The same restructuring on the read-only I-cache is simpler, since a refill is th
 
 ### The timing optimization
 
-The top 5 worst paths shared one source (`u_perf/cycle_count_reg`) routing through `mtime`/`mtimecmp` logic, 6 of 17 levels being `CARRY4` — a wide ripple-carry chain. That is `mip_mtip = (mtime >= mtimecmp)` in `csr.sv`, a 64-bit comparison recomputed every cycle. Registering it is architecturally free, since RISC-V does not bound interrupt response latency:
+The top 5 worst paths shared one source (`u_perf/cycle_count_reg`) routing through `mtime`/`mtimecmp` logic, 6 of 17 levels being `CARRY4` — a wide ripple-carry chain. That is `mip_mtip = (mtime >= mtimecmp)` in `csr.sv`, a 64-bit comparison recomputed every cycle. Registering the comparison shortened that path while adding a cycle to when the pending condition becomes visible:
 
 | | fmax | `CARRY4` | Logic delay |
 |---|---|---|---|

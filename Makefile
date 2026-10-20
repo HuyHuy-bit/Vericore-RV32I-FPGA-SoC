@@ -188,7 +188,7 @@ soc-lint:
 		rtl/verilator.vlt $(SOC_SRCS) rtl/soc/reset_controller.sv rtl/boards/*.sv
 
 soc-board-test:
-	python3 -m unittest -v synthesis.soc.test_board_tools synthesis.soc.test_floorplan
+	python3 -m unittest -v synthesis.soc.test_board_tools synthesis.soc.test_floorplan synthesis.soc.test_snapshot
 
 soc-check: soc-unit soc-firmware soc-sim soc-lint soc-board-test
 

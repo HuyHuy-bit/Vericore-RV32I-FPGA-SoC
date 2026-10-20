@@ -21,9 +21,9 @@ else:
 
 
 DOCUMENT_BLOCKS = {
-    "README.md": ("facts", "status", "soc", "snapshot", "verification", "benchmarks", "synthesis", "provenance"),
+    "README.md": ("facts", "status", "soc", "highlights"),
     "docs/evidence.md": ("overview", "facts", "status", "soc", "verification", "benchmarks", "synthesis", "synthesis-hashes", "provenance"),
-    "docs/architecture.md": ("facts", "status", "benchmarks", "synthesis"),
+    "docs/architecture.md": ("facts", "status"),
     "docs/verification.md": ("facts", "status", "summary"),
 }
 MARKER_RE = re.compile(r"<!-- portfolio:([a-z][a-z0-9-]*):(start|end) -->")
@@ -143,6 +143,22 @@ def verification_table(result: ResultSet) -> str:
     ))
 
 
+def highlights(result: ResultSet) -> str:
+    value = result.verification
+    return "\n".join((
+        f"Recorded verification baseline: **{result.manifest['measured_at'][:10]}**. "
+        "Full results and source revisions are in the [evidence ledger](docs/evidence.md).",
+        "",
+        "| Evidence | Result |",
+        "|---|---:|",
+        f"| RISC-V architecture signatures | {value['architecture_tests']['passed']}/{value['architecture_tests']['discovered']} |",
+        f"| Architecture tests compared against Spike at retirement | {value['architecture_lockstep']['passed']}/{value['architecture_lockstep']['discovered']} |",
+        f"| Random programs compared against Spike at retirement | {value['spike_random']['passed']}/{value['spike_random']['requested']} |",
+        f"| Directed runs across {len(value['memory_configurations'])} memory configurations | {sum(item['passed'] for item in value['memory_configurations'])}/{value['directed_programs'] * len(value['memory_configurations'])} |",
+        f"| Functional cover points exercised | {value['cover_points']['hit']}/{value['cover_points']['source']} |",
+    ))
+
+
 def facts(result: ResultSet, state: str, synthesis_state: str) -> str:
     value = result.verification
     assertions = value["assertions"]["concurrent"] + value["assertions"]["immediate"]
@@ -185,7 +201,7 @@ def evidence_notice(result: ResultSet, state: str, synthesis_state: str) -> str:
         measured = commits[1] if commits else result.manifest["rtl_commit"]
         lines.append(
             "Historical synthesis — the implementation table was measured for RTL "
-            f"{measured}; current RTL changes are not yet resynthesised."
+            f"{measured}; this core configuration matrix has not been rerun for current RTL."
         )
     return "\n".join(lines)
 
@@ -272,6 +288,7 @@ def block_contents(result: ResultSet, state: str, synthesis_state: str) -> dict[
         "overview": evidence_overview(result),
         "snapshot": snapshot(result),
         "verification": verification_table(result),
+        "highlights": highlights(result),
         "benchmarks": benchmark_table(result),
         "synthesis": synthesis_table(result),
         "synthesis-hashes": synthesis_hashes(result),

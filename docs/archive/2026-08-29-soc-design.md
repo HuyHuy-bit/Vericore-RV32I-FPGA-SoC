@@ -1,3 +1,5 @@
+> Archived proposal / task list. The implemented contract is in [the SoC guide](../soc.md); measured results are in [the FPGA report](../fpga.md). This file is retained as project history.
+
 # Board-Ready Wishbone SoC Design
 
 **Status:** Approved design

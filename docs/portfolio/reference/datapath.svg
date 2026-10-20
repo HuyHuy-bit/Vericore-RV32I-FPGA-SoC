@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1620 830" width="1620" height="830">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0.5 L10,5 L0,9.5 z" fill="#000" style="shape-rendering:geometricPrecision"/>
+    </marker>
+  </defs>
+  <style>
+    rect  { fill:#fff; stroke:#000; stroke-width:1; shape-rendering:crispEdges; }
+    .w    { fill:none; stroke:#000; stroke-width:1; shape-rendering:crispEdges; }
+    .c    { fill:none; stroke:#000; stroke-width:0.8; stroke-dasharray:4 4; shape-rendering:crispEdges; }
+    text  { font-family:Helvetica,Arial,sans-serif; font-size:12px; }
+    .t    { text-anchor:middle; }
+    .s    { font-size:10px; }
+    .h    { font-size:17px; text-anchor:middle; stroke-width:0; }
+    .g    { font-size:12px; text-anchor:middle; }
+    .d    { fill:#000; stroke:none; }
+  </style>
+
+
+  <!-- ===================== blocks ===================== -->
+  <rect x="70" y="260" width="26" height="180"/>
+
+  <rect x="130" y="324" width="56" height="52"/>
+
+  <rect x="130" y="210" width="56" height="40"/>
+
+  <rect x="240" y="310" width="120" height="80"/>
+
+  <rect x="215" y="470" width="150" height="52"/>
+
+  <rect x="215" y="550" width="150" height="44"/>
+
+  <rect x="390" y="130" width="26" height="490"/>
+
+  <rect x="440" y="160" width="130" height="46"/>
+
+  <rect x="450" y="290" width="130" height="120"/>
+
+  <rect x="470" y="447" width="130" height="46"/>
+
+  <rect x="470" y="560" width="150" height="48"/>
+
+  <rect x="660" y="130" width="26" height="490"/>
+
+  <rect x="710" y="290" width="22" height="60"/>
+
+  <rect x="738" y="380" width="22" height="110"/>
+
+  <rect x="770" y="280" width="100" height="180"/>
+
+  <rect x="790" y="480" width="130" height="44"/>
+
+  <rect x="700" y="560" width="150" height="44"/>
+
+  <rect x="1000" y="130" width="26" height="490"/>
+
+  <rect x="1050" y="340" width="110" height="60"/>
+
+  <rect x="1220" y="330" width="120" height="80"/>
+
+  <rect x="1050" y="437" width="180" height="66"/>
+
+  <rect x="1400" y="130" width="26" height="490"/>
+
+  <rect x="1470" y="270" width="26" height="230"/>
+
+  <!-- ===================== stage labels ===================== -->
+
+  <!-- ===================== IF ===================== -->
+  <polyline class="w" points="96,350 130,350" marker-end="url(#a)"/>
+  <polyline class="w" points="186,350 240,350" marker-end="url(#a)"/>
+  <polyline class="w" points="210,350 210,230 186,230" marker-end="url(#a)"/>
+  <polyline class="w" points="130,230 52,230 52,284 70,284" marker-end="url(#a)"/>
+  <polyline class="w" points="210,350 210,432 295,432 295,470" marker-end="url(#a)"/>
+  <polyline class="w" points="215,496 40,496 40,320 70,320" marker-end="url(#a)"/>
+  <polyline class="w" points="215,572 28,572 28,356 70,356" marker-end="url(#a)"/>
+  <polyline class="w" points="360,350 390,350" marker-end="url(#a)"/>
+  <polyline class="w" points="372,350 372,620 295,620 295,594" marker-end="url(#a)"/>
+  <circle class="d" cx="210" cy="350" r="2.8"/>
+  <circle class="d" cx="372" cy="350" r="2.8"/>
+
+  <!-- ===================== ID ===================== -->
+  <polyline class="w" points="416,350 430,350"/>
+  <polyline class="w" points="430,183 430,470"/>
+  <polyline class="w" points="430,183 440,183" marker-end="url(#a)"/>
+  <polyline class="w" points="430,315 450,315" marker-end="url(#a)"/>
+  <polyline class="w" points="430,350 450,350" marker-end="url(#a)"/>
+  <polyline class="w" points="430,470 470,470" marker-end="url(#a)"/>
+  <circle class="d" cx="430" cy="315" r="2.8"/>
+  <circle class="d" cx="430" cy="350" r="2.8"/>
+  <polyline class="w" points="580,305 660,305" marker-end="url(#a)"/>
+  <polyline class="w" points="580,400 660,400" marker-end="url(#a)"/>
+  <polyline class="w" points="600,470 660,470" marker-end="url(#a)"/>
+  <polyline class="c" points="570,183 660,183" marker-end="url(#a)"/>
+
+  <!-- ===================== EX ===================== -->
+  <polyline class="w" points="686,305 710,305" marker-end="url(#a)"/>
+  <polyline class="w" points="686,400 738,400" marker-end="url(#a)"/>
+  <polyline class="w" points="686,470 738,470" marker-end="url(#a)"/>
+  <polyline class="w" points="1050,290 1050,105 700,105 700,435 738,435" marker-end="url(#a)"/>
+  <polyline class="w" points="700,335 710,335" marker-end="url(#a)"/>
+  <circle class="d" cx="700" cy="335" r="2.8"/>
+  <circle class="d" cx="1050" cy="290" r="2.8"/>
+  <polyline class="w" points="732,320 770,320" marker-end="url(#a)"/>
+  <polyline class="w" points="760,435 770,435" marker-end="url(#a)"/>
+  <polyline class="w" points="870,370 1000,370" marker-end="url(#a)"/>
+  <polyline class="w" points="686,502 790,502" marker-end="url(#a)"/>
+  <polyline class="w" points="920,502 1000,502" marker-end="url(#a)"/>
+  <polyline class="w" points="686,250 1000,250" marker-end="url(#a)"/>
+  <polyline class="c" points="686,183 1000,183" marker-end="url(#a)"/>
+
+  <!-- predictor training, redirects (routed above the datapath) -->
+  <polyline class="w" points="790,515 696,515 696,725 384,725 384,510 365,510" marker-end="url(#a)"/>
+  <polyline class="w" points="920,510 960,510 960,85 16,85 16,392 70,392" marker-end="url(#a)"/>
+  <polyline class="w" points="1140,503 1140,760 4,760 4,428 70,428" marker-end="url(#a)"/>
+
+  <!-- forwarding unit -->
+  <polyline class="c" points="721,560 721,350" marker-end="url(#a)"/>
+  <polyline class="c" points="749,560 749,490" marker-end="url(#a)"/>
+  <polyline class="c" points="1013,620 1013,680 860,680 860,575 850,575" marker-end="url(#a)"/>
+  <polyline class="c" points="1413,620 1413,700 845,700 845,604" marker-end="url(#a)"/>
+
+  <!-- hazard -->
+  <polyline class="c" points="660,584 620,584" marker-end="url(#a)"/>
+  <polyline class="c" points="470,584 416,584" marker-end="url(#a)"/>
+  <polyline class="c" points="545,608 545,636 158,636 158,376" marker-end="url(#a)"/>
+
+  <!-- ===================== MEM ===================== -->
+  <polyline class="w" points="1026,370 1050,370" marker-end="url(#a)"/>
+  <polyline class="w" points="1026,250 1105,250 1105,340" marker-end="url(#a)"/>
+  <polyline class="w" points="1160,355 1220,355" marker-end="url(#a)"/>
+  <polyline class="w" points="1220,385 1160,385" marker-end="url(#a)"/>
+  <polyline class="w" points="1105,400 1105,425 1380,425 1380,370 1400,370" marker-end="url(#a)"/>
+  <polyline class="w" points="1026,470 1050,470" marker-end="url(#a)"/>
+  <polyline class="w" points="1230,470 1400,470" marker-end="url(#a)"/>
+  <polyline class="w" points="1026,290 1400,290" marker-end="url(#a)"/>
+  <polyline class="c" points="1026,183 1400,183" marker-end="url(#a)"/>
+
+  <!-- ===================== WB ===================== -->
+  <polyline class="w" points="1426,290 1470,290" marker-end="url(#a)"/>
+  <polyline class="w" points="1426,370 1470,370" marker-end="url(#a)"/>
+  <polyline class="w" points="1426,470 1470,470" marker-end="url(#a)"/>
+  <polyline class="w" points="1496,385 1560,385 1560,660 444,660 444,390 450,390" marker-end="url(#a)"/>
+
+  <!-- ===================== wire labels ===================== -->
+
+  <g class="halo" fill="none" stroke="#fff" stroke-width="3.5" stroke-linejoin="round">
+  <text class="h" x="810" y="26">Five-stage RV32I pipeline datapath</text>
+  <text class="s t" x="83" y="336">M</text><text class="s t" x="83" y="350">U</text><text class="s t" x="83" y="364">X</text>
+  <text class="t" x="158" y="355">PC</text>
+  <text class="t" x="158" y="235">+4</text>
+  <text class="t" x="300" y="345">I-cache /</text><text class="t" x="300" y="362">instr_mem</text>
+  <text class="t" x="290" y="491">branch_predictor</text><text class="s t" x="290" y="507">BTB + bimodal/gshare</text>
+  <text class="t" x="290" y="567">RAS</text><text class="s t" x="290" y="583">return-addr stack</text>
+  <text class="t s" transform="rotate(-90 403 385)" x="403" y="385">IF/ID</text>
+  <text class="t" x="505" y="188">control</text>
+  <text class="t" x="515" y="355">reg_file</text>
+  <text class="t" x="535" y="475">imm_gen</text>
+  <text class="t" x="545" y="580">hazard_detect</text><text class="s t" x="545" y="596">(load-use)</text>
+  <text class="t s" transform="rotate(-90 673 385)" x="673" y="385">ID/EX</text>
+  <text class="s t" x="721" y="313">M</text><text class="s t" x="721" y="325">U</text><text class="s t" x="721" y="337">X</text>
+  <text class="s t" x="749" y="428">M</text><text class="s t" x="749" y="440">U</text><text class="s t" x="749" y="452">X</text>
+  <text class="t" x="820" y="375">alu</text>
+  <text class="t" x="855" y="507">branch_unit</text>
+  <text class="t" x="775" y="587">forwarding_unit</text>
+  <text class="t s" transform="rotate(-90 1013 385)" x="1013" y="385">EX/MEM</text>
+  <text class="t" x="1105" y="365">lsu</text><text class="s t" x="1105" y="382">subword align</text>
+  <text class="t" x="1280" y="365">dcache /</text><text class="t" x="1280" y="382">data_mem</text>
+  <text class="t" x="1140" y="459">csr</text><text class="s t" x="1140" y="475">trap + interrupt commit</text><text class="s t" x="1140" y="491">mstatus/mie/mip/mtime</text>
+  <text class="t s" transform="rotate(-90 1413 385)" x="1413" y="385">MEM/WB</text>
+  <text class="s t" x="1483" y="371">M</text><text class="s t" x="1483" y="383">U</text><text class="s t" x="1483" y="395">X</text>
+  <text class="g" x="250"  y="118">IF — frontend.sv</text>
+  <text class="g" x="530"  y="118">ID — backend.sv</text>
+  <text class="g" x="815"  y="118">EX</text>
+  <text class="g" x="1200" y="118">MEM — single commit point</text>
+  <text class="g" x="1490" y="118">WB</text>
+  <text class="s" x="192" y="345">PC</text>
+  <text class="s" x="365" y="345">if_id_q</text>
+  <text class="s" x="48" y="490">predicted target</text>
+  <text class="s" x="36" y="566">return address</text>
+  <text class="s" x="433" y="310">rs1</text>
+  <text class="s" x="433" y="345">rs2</text>
+  <text class="s" x="586" y="300">rd1</text>
+  <text class="s" x="586" y="395">rd2</text>
+  <text class="s" x="606" y="465">imm</text>
+  <text class="s" x="692" y="245">rs2 (store data)</text>
+  <text class="s" x="706" y="100">forwarded result (EX/MEM, MEM/WB)</text>
+  <text class="s" x="692" y="497">PC / operands / imm</text>
+  <text class="s" x="876" y="365">result</text>
+  <text class="s" x="926" y="497">resolved</text>
+  <text class="s" x="300" y="720">bp_update_*</text>
+  <text class="s" x="300" y="80">EX mispredict redirect</text>
+  <text class="s" x="300" y="755">MEM trap / interrupt redirect</text>
+  <text class="s" x="1166" y="350">addr / store</text>
+  <text class="s" x="1166" y="400">word</text>
+  <text class="s" x="1032" y="285">ALU result</text>
+  <text class="s" x="1236" y="465">csr read</text>
+  <text class="s" x="1110" y="420">load data</text>
+  <text class="s" x="452" y="655">write data / rd</text>
+  <text class="s" x="430" y="578">stall</text>
+  <text class="s" x="166" y="631">stall</text>
+  <text class="s" x="1020" y="675">EX/MEM fwd</text>
+  <text class="s" x="1020" y="695">MEM/WB fwd</text>
+  <text class="s" x="20" y="800">solid = data path   ·   dashed = control / hazard   ·   tall bar = pipeline register</text>
+  <text class="s" x="20" y="818">next-PC priority: freeze &gt; trap/irq &gt; mispredict &gt; load-use stall &gt; predict &gt; +4   ·   RAS prediction wins over BTB when valid</text>
+  </g>
+  <g fill="#000" stroke="none">
+  <text class="h" x="810" y="26">Five-stage RV32I pipeline datapath</text>
+  <text class="s t" x="83" y="336">M</text><text class="s t" x="83" y="350">U</text><text class="s t" x="83" y="364">X</text>
+  <text class="t" x="158" y="355">PC</text>
+  <text class="t" x="158" y="235">+4</text>
+  <text class="t" x="300" y="345">I-cache /</text><text class="t" x="300" y="362">instr_mem</text>
+  <text class="t" x="290" y="491">branch_predictor</text><text class="s t" x="290" y="507">BTB + bimodal/gshare</text>
+  <text class="t" x="290" y="567">RAS</text><text class="s t" x="290" y="583">return-addr stack</text>
+  <text class="t s" transform="rotate(-90 403 385)" x="403" y="385">IF/ID</text>
+  <text class="t" x="505" y="188">control</text>
+  <text class="t" x="515" y="355">reg_file</text>
+  <text class="t" x="535" y="475">imm_gen</text>
+  <text class="t" x="545" y="580">hazard_detect</text><text class="s t" x="545" y="596">(load-use)</text>
+  <text class="t s" transform="rotate(-90 673 385)" x="673" y="385">ID/EX</text>
+  <text class="s t" x="721" y="313">M</text><text class="s t" x="721" y="325">U</text><text class="s t" x="721" y="337">X</text>
+  <text class="s t" x="749" y="428">M</text><text class="s t" x="749" y="440">U</text><text class="s t" x="749" y="452">X</text>
+  <text class="t" x="820" y="375">alu</text>
+  <text class="t" x="855" y="507">branch_unit</text>
+  <text class="t" x="775" y="587">forwarding_unit</text>
+  <text class="t s" transform="rotate(-90 1013 385)" x="1013" y="385">EX/MEM</text>
+  <text class="t" x="1105" y="365">lsu</text><text class="s t" x="1105" y="382">subword align</text>
+  <text class="t" x="1280" y="365">dcache /</text><text class="t" x="1280" y="382">data_mem</text>
+  <text class="t" x="1140" y="459">csr</text><text class="s t" x="1140" y="475">trap + interrupt commit</text><text class="s t" x="1140" y="491">mstatus/mie/mip/mtime</text>
+  <text class="t s" transform="rotate(-90 1413 385)" x="1413" y="385">MEM/WB</text>
+  <text class="s t" x="1483" y="371">M</text><text class="s t" x="1483" y="383">U</text><text class="s t" x="1483" y="395">X</text>
+  <text class="g" x="250"  y="118">IF — frontend.sv</text>
+  <text class="g" x="530"  y="118">ID — backend.sv</text>
+  <text class="g" x="815"  y="118">EX</text>
+  <text class="g" x="1200" y="118">MEM — single commit point</text>
+  <text class="g" x="1490" y="118">WB</text>
+  <text class="s" x="192" y="345">PC</text>
+  <text class="s" x="365" y="345">if_id_q</text>
+  <text class="s" x="48" y="490">predicted target</text>
+  <text class="s" x="36" y="566">return address</text>
+  <text class="s" x="433" y="310">rs1</text>
+  <text class="s" x="433" y="345">rs2</text>
+  <text class="s" x="586" y="300">rd1</text>
+  <text class="s" x="586" y="395">rd2</text>
+  <text class="s" x="606" y="465">imm</text>
+  <text class="s" x="692" y="245">rs2 (store data)</text>
+  <text class="s" x="706" y="100">forwarded result (EX/MEM, MEM/WB)</text>
+  <text class="s" x="692" y="497">PC / operands / imm</text>
+  <text class="s" x="876" y="365">result</text>
+  <text class="s" x="926" y="497">resolved</text>
+  <text class="s" x="300" y="720">bp_update_*</text>
+  <text class="s" x="300" y="80">EX mispredict redirect</text>
+  <text class="s" x="300" y="755">MEM trap / interrupt redirect</text>
+  <text class="s" x="1166" y="350">addr / store</text>
+  <text class="s" x="1166" y="400">word</text>
+  <text class="s" x="1032" y="285">ALU result</text>
+  <text class="s" x="1236" y="465">csr read</text>
+  <text class="s" x="1110" y="420">load data</text>
+  <text class="s" x="452" y="655">write data / rd</text>
+  <text class="s" x="430" y="578">stall</text>
+  <text class="s" x="166" y="631">stall</text>
+  <text class="s" x="1020" y="675">EX/MEM fwd</text>
+  <text class="s" x="1020" y="695">MEM/WB fwd</text>
+  <text class="s" x="20" y="800">solid = data path   ·   dashed = control / hazard   ·   tall bar = pipeline register</text>
+  <text class="s" x="20" y="818">next-PC priority: freeze &gt; trap/irq &gt; mispredict &gt; load-use stall &gt; predict &gt; +4   ·   RAS prediction wins over BTB when valid</text>
+  </g>
+</svg>

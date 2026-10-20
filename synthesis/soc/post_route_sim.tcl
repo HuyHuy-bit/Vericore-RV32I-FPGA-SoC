@@ -22,7 +22,7 @@ set_property generic [list IMEM_INIT_FILE=$imem_file DMEM_INIT_FILE=$dmem_file] 
     [get_filesets sources_1]
 set_property verilog_define SYNTHESIS [get_filesets sources_1]
 set_property target_simulator XSim [current_project]
-set_property xsim.simulate.runtime all [get_filesets sim_1]
+set_property xsim.simulate.runtime 0ns [get_filesets sim_1]
 update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
 
@@ -34,6 +34,14 @@ open_run impl_1
 
 report_timing_summary -delay_type min_max -report_unconstrained \
     -file "$output_dir/timing_summary.rpt"
+report_utilization -file "$output_dir/utilization.rpt"
+report_drc -file "$output_dir/drc.rpt"
+report_clocks -file "$output_dir/clocks.rpt"
+set severe_drc [get_drc_violations -quiet \
+    -filter {SEVERITY == "Error" || SEVERITY == "Critical Warning"}]
+if {[llength $severe_drc] != 0} {
+    error "DRC contains a critical warning or error"
+}
 set setup_path [get_timing_paths -setup -max_paths 1]
 if {[llength $setup_path] != 1} {
     error "no setup timing path was reported"
@@ -85,5 +93,16 @@ close $meta
 write_sdf -force $sdf_file
 write_verilog -force -mode timesim -sdf_anno true -sdf_file $sdf_file \
     $netlist_file
+write_checkpoint -force "$output_dir/routed.dcp"
+write_bitstream -force "$output_dir/rv32i-soc-arty-a7-35t.bit"
 launch_simulation -mode post-implementation -type timing
+open_vcd "$output_dir/timing-boot.vcd"
+log_vcd [get_objects /arty_post_route_tb/clk100]
+log_vcd [get_objects /arty_post_route_tb/btn]
+log_vcd [get_objects /arty_post_route_tb/led]
+log_vcd [get_objects /arty_post_route_tb/uart_tx]
+log_vcd [get_objects /arty_post_route_tb/uart_byte]
+log_vcd [get_objects /arty_post_route_tb/received_bytes]
+run all
+close_vcd
 puts "===SOC_POST_ROUTE_SIM_DONE==="

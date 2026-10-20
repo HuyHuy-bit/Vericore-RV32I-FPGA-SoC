@@ -1419,7 +1419,7 @@ def check_repository_evidence(root: Path) -> None:
     if synthesis_status == "historical":
         synthesis_notice = (
             "Historical synthesis — the implementation table was measured for RTL "
-            f"{synthesis_rtl}; current RTL changes are not yet resynthesised."
+            f"{synthesis_rtl}; this core configuration matrix has not been rerun for current RTL."
         )
         for relative in FACT_DOCUMENTS:
             if (root / relative).read_text(encoding="utf-8").count(synthesis_notice) != 1:

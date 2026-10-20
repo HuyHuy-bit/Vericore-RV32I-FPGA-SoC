@@ -1,6 +1,8 @@
 # Functional coverage report
 
-**Evidence status: current.**
+[Verification](verification.md) · [Evidence ledger](evidence.md)
+
+**Evidence status: historical.**
 
 **44/44 cover points hit (100.0%)**, from the directed suite and deterministic BTB-alias fixture run against a cache-enabled build (`make coverage`).
 
