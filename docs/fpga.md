@@ -61,8 +61,10 @@ attention before claiming hardware readiness:
 - `CHECK-3`: the report capped the BRAM-control warnings at 20 instances.
 
 The successful boot test does not resolve those reset/configuration concerns.
-The original [Vivado Device image](images/soc-vivado-device.png) and its +2.009 ns
-WNS belong to the earlier `d21ecd3fe310` implementation. The [core synthesis
+The original [Vivado Device image](images/soc-vivado-device.png),
+[floorplan](images/soc-floorplan.svg), and their +2.009 ns WNS belong to the earlier
+`d21ecd3fe310` implementation. Their provenance is checked against that recorded
+revision; they do not represent the current RTL. The [core synthesis
 matrix](evidence.md#historical-core-synthesis-matrix) uses a different top and a
 2 ns constraint. Neither is substituted for this run's results.
 

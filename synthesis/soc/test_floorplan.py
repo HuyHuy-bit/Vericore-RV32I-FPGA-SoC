@@ -6,8 +6,10 @@ import json
 import os
 from pathlib import Path
 import struct
+import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from synthesis.soc import render_floorplan
 
@@ -113,13 +115,44 @@ class FloorplanRendererTest(unittest.TestCase):
 
 
 class PublishedFloorplanTest(unittest.TestCase):
-    def test_committed_floorplan_is_bound_to_unchanged_physical_inputs(self) -> None:
+    def test_historical_floorplan_matches_its_recorded_provenance(self) -> None:
         root = Path(__file__).resolve().parents[2]
         render_floorplan.validate_published(
             root / "docs/images/soc-floorplan.svg",
             root / "docs/images/soc-floorplan.json",
             root,
+            require_current=False,
         )
+
+    def test_current_floorplan_rejects_changed_physical_inputs(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        run = subprocess.run
+
+        def changed_inputs(command, **kwargs):
+            if command[:3] == ["git", "diff", "--quiet"]:
+                return subprocess.CompletedProcess(command, 1)
+            return run(command, **kwargs)
+
+        with patch.object(render_floorplan.subprocess, "run", side_effect=changed_inputs):
+            with self.assertRaisesRegex(
+                render_floorplan.FloorplanError, "physical design inputs changed"
+            ):
+                render_floorplan.validate_published(
+                    root / "docs/images/soc-floorplan.svg",
+                    root / "docs/images/soc-floorplan.json",
+                    root,
+                )
+
+    def test_historical_floorplan_rejects_tampered_svg(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        with tempfile.TemporaryDirectory() as temporary:
+            image = Path(temporary) / "floorplan.svg"
+            image.write_bytes((root / "docs/images/soc-floorplan.svg").read_bytes() + b"\n")
+            with self.assertRaisesRegex(render_floorplan.FloorplanError, "SVG hash mismatch"):
+                render_floorplan.validate_published(
+                    image, root / "docs/images/soc-floorplan.json", root,
+                    require_current=False,
+                )
 
     def test_published_vivado_capture_matches_its_provenance(self) -> None:
         root = Path(__file__).resolve().parents[2]

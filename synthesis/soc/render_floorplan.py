@@ -376,7 +376,9 @@ def build_floorplan(
     return svg, metadata
 
 
-def validate_published(svg_path: Path, metadata_path: Path, root: Path) -> None:
+def validate_published(
+    svg_path: Path, metadata_path: Path, root: Path, *, require_current: bool = True
+) -> None:
     try:
         svg = svg_path.read_bytes()
         metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
@@ -473,6 +475,8 @@ def validate_published(svg_path: Path, metadata_path: Path, root: Path) -> None:
     recorded_rtl = recorded_rtl.stdout.strip()
     if recorded_rtl != rtl_commit:
         raise FloorplanError("published floorplan RTL identity is inconsistent")
+    if not require_current:
+        return
     unchanged = subprocess.run(
         [
             "git",
